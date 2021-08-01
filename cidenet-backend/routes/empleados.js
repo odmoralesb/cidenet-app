@@ -6,7 +6,8 @@ const { validarCampos } = require('../middlewares');
 const {
     esPaisValido,
     esTipoIdentificacionValido,
-    existeCorreo
+    existeCorreo,
+    existeIdentificacion
 } = require('../helpers/db-validators');
 
 const { empleadosPost } = require('../controllers/empleados');
@@ -74,6 +75,7 @@ router.post(
             'identificacion',
             'El campo identificacion solo permite caracteres alfanumerico y el caracter "-"'
         ).matches(/^[A-Za-z0-9\-]+$/),
+        check('identificacion').custom(existeIdentificacion),
         // Validacion de correo
         check('correo', 'El correo es obligatorio').not().isEmpty(),
         validarCampos,

@@ -23,8 +23,19 @@ const existeCorreo = async (correo = '') => {
     }
 };
 
+const existeIdentificacion = async (identificacion = '') => {
+    console.log('# iden val', identificacion);
+    const existe = await Empleado.findOne({ identificacion });
+    if (existe) {
+        throw new Error(
+            `Esta identificacion ${identificacion} ya está registrado en la BD`
+        );
+    }
+};
+
 module.exports = {
     esPaisValido,
     esTipoIdentificacionValido,
-    existeCorreo
+    existeCorreo,
+    existeIdentificacion
 };
