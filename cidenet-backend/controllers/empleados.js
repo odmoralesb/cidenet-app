@@ -9,7 +9,9 @@ const empleadosPost = async (req, res = response) => {
         primer_nombre,
         otros_nombres,
         pais,
-        tipo_identificacion
+        tipo_identificacion,
+        identificacion,
+        correo
     } = req.body;
 
     const empleado = new Empleado({
@@ -18,7 +20,9 @@ const empleadosPost = async (req, res = response) => {
         primer_nombre,
         otros_nombres,
         pais,
-        tipo_identificacion
+        tipo_identificacion,
+        identificacion,
+        correo
     });
 
     // Guardar en BD

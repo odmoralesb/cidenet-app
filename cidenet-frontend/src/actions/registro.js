@@ -22,7 +22,6 @@ export const registrar = () => async (dispatch, getState) => {
     axios
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {
-            console.log('registro de empleado', response);
             dispatch({ type: types.REGISTRO_REALIZADO });
             mostrarMensaje(dispatch, {
                 tipo: 'success',
@@ -64,7 +63,6 @@ export const getTipoIdentificaciones = () => async (dispatch, getState) => {
     axios
         .get(`${API_URL}/tipoidentificaciones`)
         .then((response) => {
-            console.log(response.data.tipo_identificacones);
             const data = response.data.tipo_identificacones;
             dispatch({
                 type: types.OBTENER_TIPO_IDENTIFICACIONES,

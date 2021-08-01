@@ -1,4 +1,4 @@
-const { Pais, TipoIdentificacion } = require('../models');
+const { Pais, TipoIdentificacion, Empleado } = require('../models');
 
 const esPaisValido = async (nombre = '') => {
     const existePais = await Pais.findOne({ nombre });
@@ -16,7 +16,15 @@ const esTipoIdentificacionValido = async (nombre = '') => {
     }
 };
 
+const existeCorreo = async (correo = '') => {
+    const existe = await Empleado.findOne({ correo });
+    if (existe) {
+        throw new Error(`El correo ${correo} ya está registrado en la BD`);
+    }
+};
+
 module.exports = {
     esPaisValido,
-    esTipoIdentificacionValido
+    esTipoIdentificacionValido,
+    existeCorreo
 };

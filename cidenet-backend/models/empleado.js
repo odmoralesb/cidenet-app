@@ -23,6 +23,14 @@ const empleadoSchema = Schema({
     tipo_identificacion: {
         type: String,
         required: [true, 'El tipo de identificacion es obligatorio']
+    },
+    identificacion: {
+        type: String,
+        required: [true, 'La identificacion es obligatorio']
+    },
+    correo: {
+        type: String,
+        required: [true, 'El correo es obligatorio']
     }
 });
 

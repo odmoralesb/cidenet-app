@@ -204,10 +204,38 @@ class Registro extends Component {
                         </div>
                     </div>
 
-                    <div className="col-12 mt-5">
-                        <button className="btn btn-primary" type="submit">
-                            Registrar
-                        </button>
+                    <div className="row mt-2">
+                        <div className="col-md-4">
+                            <label
+                                htmlFor="identificacion"
+                                className="form-label"
+                            >
+                                Identificación
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="identificacion"
+                                value={
+                                    empleado.get('identificacion')
+                                        ? empleado.get('identificacion')
+                                        : ''
+                                }
+                                onChange={(e) =>
+                                    this.props.updateInputs(
+                                        'empleado.identificacion',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div className="row mt-2">
+                        <div className="col-12 mt-5">
+                            <button className="btn btn-primary" type="submit">
+                                Registrar
+                            </button>
+                        </div>
                     </div>
                 </form>
             </Fragment>

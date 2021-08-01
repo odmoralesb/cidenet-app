@@ -8,7 +8,8 @@ const INITIAL_STATE = Immutable.fromJS({
         primer_nombre: null,
         otros_nombres: null,
         pais: null,
-        tipo_identificacion: null
+        tipo_identificacion: null,
+        identificacion: null
     },
     paises: [],
     tipo_identificaciones: []
