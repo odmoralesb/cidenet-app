@@ -1,0 +1,55 @@
+[data-css-npp5qg] {
+    z-index: 10000 !important;
+}
+
+.toastify {
+    background: rgba(0,0,0,0.7) !important;
+}
+
+
+
+.toastify .toastify-content {
+    font-size: 0.8em;
+    position: relative;
+    padding-left: 22px; 
+}
+
+.toastify .toastify-info::before {
+    content: "\f05a";
+    font-family: Fontawesome;
+    color: #4fc3f7;
+    font-size: 1.5em;
+    position: absolute;
+    top: -4px;
+    left: 0;
+}
+
+.toastify .toastify-warning::before {
+    font-family: Fontawesome;
+    content: "\f071"; /*\f071*/
+    color: #ffb300;
+    font-size: 1.5em;
+    position: absolute;
+    top: -4px;
+    left: 0;
+}
+
+.toastify .toastify-success::before {
+    font-family: Fontawesome;
+    content: "\f058";
+    color: #4caf50;
+    font-size: 1.5em;
+    position: absolute;
+    top: -4px;
+    left: 0;
+}
+
+.toastify .toastify-danger::before {
+    font-family: Fontawesome;
+    content: "\f05c";
+    color: #f44336;
+    font-size: 1.5em;
+    position: absolute;
+    top: -4px;
+    left: 0;
+}

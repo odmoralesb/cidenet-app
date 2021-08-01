@@ -1,0 +1,8 @@
+//Layout
+export const MOSTRAR_MENSAJE = 'MOSTRAR_MENSAJE';
+export const LIMPIAR_MENSAJE = 'LIMPIAR_MENSAJE';
+
+// empleados
+export const LANZAR_MENSAJE_TOAST = 'LANZAR_MENSAJE_TOAST';
+export const MODIFICAR_INPUTS = 'MODIFICAR_INPUTS';
+export const OBTENER_DATOS = 'OBTENER_DATOS';
