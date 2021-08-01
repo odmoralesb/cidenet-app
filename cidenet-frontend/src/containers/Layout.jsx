@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 import { limpiarMensaje } from '../actions/layout';
 
 class Layout extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            LinkSelected: 'home'
+        };
+    }
+
     componentDidUpdate() {
         this.props.limpiarMensaje();
     }
+
+    activeLink = (id) => {
+        let { LinkSelected } = this.state;
+        LinkSelected = id;
+        this.setState({ LinkSelected });
+    };
+
+    activedLink = (id) => {
+        return this.state.LinkSelected === id ? 'active' : '';
+    };
 
     render() {
         if (this.props.mensaje) {
@@ -38,13 +56,11 @@ class Layout extends Component {
 
         return (
             <div>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            CIDENET
-                        </a>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <div className="container-fluid">
+                        <span className="brand">CIDENET</span>
                         <button
-                            class="navbar-toggler"
+                            className="navbar-toggler"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#navbarNav"
@@ -52,28 +68,53 @@ class Layout extends Component {
                             aria-expanded="false"
                             aria-label="Toggle navigation"
                         >
-                            <span class="navbar-toggler-icon"></span>
+                            <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link active"
-                                        aria-current="page"
-                                        href="#"
+                        <div
+                            className="collapse navbar-collapse"
+                            id="navbarNav"
+                        >
+                            <ul className="navbar-nav">
+                                <li
+                                    className="nav-item"
+                                    onClick={() => this.activeLink('home')}
+                                >
+                                    <Link
+                                        to="/"
+                                        className={`nav-link ${this.activedLink(
+                                            'home'
+                                        )}`}
                                     >
                                         Home
-                                    </a>
+                                    </Link>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        Registtrar
-                                    </a>
+                                <li
+                                    className="nav-item"
+                                    onClick={() => this.activeLink('registrar')}
+                                >
+                                    <Link
+                                        to="/registrar"
+                                        className={`nav-link ${this.activedLink(
+                                            'registrar'
+                                        )}`}
+                                    >
+                                        Registrar
+                                    </Link>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li
+                                    className="nav-item"
+                                    onClick={() =>
+                                        this.activeLink('actualizar')
+                                    }
+                                >
+                                    <Link
+                                        to="/actualizar"
+                                        className={`nav-link ${this.activedLink(
+                                            'actualizar'
+                                        )}`}
+                                    >
                                         Actualizar
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

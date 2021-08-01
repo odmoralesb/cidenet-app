@@ -13,7 +13,7 @@ export default (
                 <Route exact path="/" component={Home} />
                 <Route exact path="/registrar" component={Registro} />
                 <Route exact path="/actualizar/:id" component={Actualizacion} />
-                <Route exact path="/actualizar/:id" component={Actualizacion} />
+                <Route exact path="/actualizar" component={Actualizacion} />
                 <Route component={NotFound} />
             </Switch>
         </Layout>
