@@ -79,3 +79,42 @@ export const getTipoIdentificaciones = () => async (dispatch, getState) => {
             });
         });
 };
+
+export const getCorreosSimilares = () => async (dispatch, getState) => {
+    const axios = createAxiosInstance();
+
+    const { primer_nombre, primer_apellido } = getState()
+        .registro.get('empleado')
+        .toJS();
+
+    let apellido = primer_apellido;
+    if (primer_apellido) {
+        apellido = primer_apellido.split(' ');
+        if (apellido.length === 2) {
+            apellido = `${apellido[0]}${apellido[1]}`;
+        } else if (apellido.length > 2) {
+            apellido = `${apellido[0]}${apellido[1]}${apellido[2]}`;
+        } else {
+            apellido = apellido[0];
+        }
+    }
+    const termino = `${primer_nombre}.${apellido}`;
+
+    axios
+        .get(`${API_URL}/buscar/correo/${termino}`)
+        .then((response) => {
+            const data = response.data.empleados.map((x) => {
+                return x.correo;
+            });
+            dispatch({ type: types.OBTENER_CORREOS_SIMILARES, payload: data });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};

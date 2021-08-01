@@ -10,6 +10,7 @@ class Server {
 
         this.paths = {
             empleados: '/api/empleados',
+            buscarcorreos: '/api/buscar',
             paises: '/api/paises',
             tipo_identificaciones: '/api/tipoidentificaciones'
         };
@@ -41,6 +42,7 @@ class Server {
 
     routes() {
         this.app.use(this.paths.empleados, require('../routes/empleados'));
+        this.app.use(this.paths.buscarcorreos, require('../routes/buscar'));
         this.app.use(this.paths.paises, require('../routes/paises'));
         this.app.use(
             this.paths.tipo_identificaciones,

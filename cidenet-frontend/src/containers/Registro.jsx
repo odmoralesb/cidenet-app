@@ -6,13 +6,84 @@ import {
     updateInputs,
     registrar,
     getPaises,
-    getTipoIdentificaciones
+    getTipoIdentificaciones,
+    getCorreosSimilares
 } from '../actions/registro';
 
 class Registro extends Component {
     componentWillMount() {
         this.props.getPaises();
         this.props.getTipoIdentificaciones();
+        //this.props.getCorreosSimilares();
+    }
+
+    setCorreo = (primer_nombre, primer_apellido) => {
+        let apellido = primer_apellido.split(' ');
+
+        const correos_similares = this.props.correos_similares
+            .toJS()
+            .map((x) => {
+                return x.split('@')[0];
+            })
+            .sort()
+            .reverse();
+
+        let id = '';
+        if (correos_similares.length > 0) {
+            let primer_correo = correos_similares[0];
+            const separacion = primer_correo.split('.');
+            if (separacion.length <= 2) {
+                id = '.1';
+            } else {
+                id = separacion[2];
+                const nid = parseInt(id) ? parseInt(id) + 1 : 1;
+                id = '.' + nid;
+            }
+        }
+
+        if (apellido.length === 2) {
+            apellido = `${apellido[0]}${apellido[1]}`;
+        } else if (apellido.length > 2) {
+            apellido = `${apellido[0]}${apellido[1]}${apellido[2]}`;
+        } else {
+            apellido = apellido[0];
+        }
+
+        const dominio =
+            this.props.empleado.get('pais') &&
+            this.props.empleado.get('pais').toUpperCase() === 'COLOMBIA'
+                ? 'cidenet.com.co'
+                : 'cidenet.com.us';
+
+        this.props.updateInputs(
+            'empleado.correo',
+            `${primer_nombre}.${apellido}${id}@${dominio}`
+        );
+    };
+
+    componentWillReceiveProps(nextProps) {
+        const empleado_current = this.props.empleado.toJS();
+        const empleado_next = nextProps.empleado.toJS();
+
+        if (
+            empleado_current.primer_nombre != empleado_next.primer_nombre ||
+            empleado_current.primer_apellido != empleado_next.primer_apellido ||
+            empleado_current.pais != empleado_next.pais
+        ) {
+            this.props.getCorreosSimilares();
+            if (
+                empleado_next.primer_nombre &&
+                empleado_next.primer_apellido &&
+                empleado_next.pais
+            ) {
+                this.setCorreo(
+                    empleado_next.primer_nombre,
+                    empleado_next.primer_apellido
+                );
+            } else {
+                this.props.updateInputs('empleado.correo', null);
+            }
+        }
     }
 
     registrar = (e) => {
@@ -21,7 +92,13 @@ class Registro extends Component {
     };
 
     render() {
-        const { empleado, paises, tipo_identificaciones } = this.props;
+        const {
+            empleado,
+            paises,
+            tipo_identificaciones,
+            correos_similares
+        } = this.props;
+
         return (
             <Fragment>
                 <h4>Registro de empleados</h4>
@@ -229,7 +306,31 @@ class Registro extends Component {
                                 }
                             />
                         </div>
+
+                        <div className="col-md-4">
+                            <label htmlFor="correo" className="form-label">
+                                Correo
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="correo"
+                                value={
+                                    empleado.get('correo')
+                                        ? empleado.get('correo')
+                                        : ''
+                                }
+                                onChange={(e) =>
+                                    this.props.updateInputs(
+                                        'empleado.correo',
+                                        e.target.value
+                                    )
+                                }
+                                disabled
+                            />
+                        </div>
                     </div>
+
                     <div className="row mt-2">
                         <div className="col-12 mt-5">
                             <button className="btn btn-primary" type="submit">
@@ -247,7 +348,8 @@ function mapStateToProps(state) {
     return {
         empleado: state.registro.get('empleado'),
         paises: state.registro.get('paises'),
-        tipo_identificaciones: state.registro.get('tipo_identificaciones')
+        tipo_identificaciones: state.registro.get('tipo_identificaciones'),
+        correos_similares: state.registro.get('correos_similares')
     };
 }
 
@@ -256,7 +358,8 @@ function mapDispatchToProps(dispatch) {
         updateInputs: (path, value) => dispatch(updateInputs(path, value)),
         registrar: () => dispatch(registrar()),
         getPaises: () => dispatch(getPaises()),
-        getTipoIdentificaciones: () => dispatch(getTipoIdentificaciones())
+        getTipoIdentificaciones: () => dispatch(getTipoIdentificaciones()),
+        getCorreosSimilares: () => dispatch(getCorreosSimilares())
     };
 }
 
