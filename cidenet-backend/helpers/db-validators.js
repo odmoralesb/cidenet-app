@@ -1,22 +1,22 @@
-const { Usuario } = require('../models');
+const { Pais, TipoIdentificacion } = require('../models');
 
-const emailExiste = async (correo = '') => {
-    // Verificar si el correo existe
-    const existeEmail = await Usuario.findOne({ correo });
-    if (existeEmail) {
-        throw new Error(`El correo ${correo} está registrado en la BD`);
+const esPaisValido = async (nombre = '') => {
+    const existePais = await Pais.findOne({ nombre });
+    if (!existePais) {
+        throw new Error(`El pais ${nombre} no está registrado en la BD`);
     }
 };
 
-const existeUsuarioPorID = async (id) => {
-    // Verificar si el correo existe
-    const existeUsuario = await Usuario.findById(id);
-    if (!existeUsuario) {
-        throw new Error(`El id ${id} no existe`);
+const esTipoIdentificacionValido = async (nombre = '') => {
+    const existeTipo = await TipoIdentificacion.findOne({ nombre });
+    if (!existeTipo) {
+        throw new Error(
+            `El tipo de identificacion ${nombre} no está registrado en la BD`
+        );
     }
 };
 
 module.exports = {
-    emailExiste,
-    existeUsuarioPorID
+    esPaisValido,
+    esTipoIdentificacionValido
 };

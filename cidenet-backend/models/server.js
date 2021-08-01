@@ -9,7 +9,9 @@ class Server {
         this.port = process.env.PORT;
 
         this.paths = {
-            empleados: '/api/empleados'
+            empleados: '/api/empleados',
+            paises: '/api/paises',
+            tipo_identificaciones: '/api/tipoidentificaciones'
         };
 
         // Conectar a base de datos
@@ -39,6 +41,11 @@ class Server {
 
     routes() {
         this.app.use(this.paths.empleados, require('../routes/empleados'));
+        this.app.use(this.paths.paises, require('../routes/paises'));
+        this.app.use(
+            this.paths.tipo_identificaciones,
+            require('../routes/tipo_identificaciones')
+        );
     }
 
     listen() {

@@ -3,7 +3,10 @@ const { check } = require('express-validator');
 
 const { validarCampos } = require('../middlewares');
 
-const {} = require('../helpers/db-validators');
+const {
+    esPaisValido,
+    esTipoIdentificacionValido
+} = require('../helpers/db-validators');
 
 const { empleadosPost } = require('../controllers/empleados');
 
@@ -57,6 +60,17 @@ router.post(
             'otros_nombres',
             'El campo otros nombres debe ser todo en mayusculas sin acentos ni ñ'
         ).matches(/^$|^[A-Z\s]+$/),
+        // Validacion pais, tipo de identificacion
+        check('pais', 'El campo pais es obligatorio').not().isEmpty(),
+        check(
+            'tipo_identificacion',
+            'El campo tipo_identificacion es obligatorio'
+        )
+            .not()
+            .isEmpty(),
+        validarCampos,
+        check('pais').custom(esPaisValido),
+        check('tipo_identificacion').custom(esTipoIdentificacionValido),
         validarCampos
     ],
     empleadosPost

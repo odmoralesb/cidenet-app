@@ -1,6 +1,5 @@
 const { response } = require('express');
 const Empleado = require('../models/empleado');
-const bcryptjs = require('bcryptjs');
 
 const empleadosPost = async (req, res = response) => {
     //
@@ -8,14 +7,18 @@ const empleadosPost = async (req, res = response) => {
         primer_apellido,
         segundo_apellido,
         primer_nombre,
-        otros_nombres
+        otros_nombres,
+        pais,
+        tipo_identificacion
     } = req.body;
 
     const empleado = new Empleado({
         primer_apellido,
         segundo_apellido,
         primer_nombre,
-        otros_nombres
+        otros_nombres,
+        pais,
+        tipo_identificacion
     });
 
     // Guardar en BD

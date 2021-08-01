@@ -15,6 +15,14 @@ const empleadoSchema = Schema({
     },
     otros_nombres: {
         type: String
+    },
+    pais: {
+        type: String,
+        required: [true, 'El pais es obligatorio']
+    },
+    tipo_identificacion: {
+        type: String,
+        required: [true, 'El tipo de identificacion es obligatorio']
     }
 });
 

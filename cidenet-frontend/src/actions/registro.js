@@ -19,7 +19,6 @@ export function updateInputs(path, value) {
 export const registrar = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
     const empleado = getState().registro.get('empleado').toJS();
-    console.log('# empleado', empleado);
     axios
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {
@@ -28,6 +27,48 @@ export const registrar = () => async (dispatch, getState) => {
             mostrarMensaje(dispatch, {
                 tipo: 'success',
                 descripcion: 'Registro realizado con exito'
+            });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const getPaises = () => async (dispatch, getState) => {
+    const axios = createAxiosInstance();
+    axios
+        .get(`${API_URL}/paises`)
+        .then((response) => {
+            const data = response.data.paises;
+            dispatch({ type: types.OBTENER_PAISES, payload: data });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const getTipoIdentificaciones = () => async (dispatch, getState) => {
+    const axios = createAxiosInstance();
+    axios
+        .get(`${API_URL}/tipoidentificaciones`)
+        .then((response) => {
+            console.log(response.data.tipo_identificacones);
+            const data = response.data.tipo_identificacones;
+            dispatch({
+                type: types.OBTENER_TIPO_IDENTIFICACIONES,
+                payload: data
             });
         })
         .catch((err) => {
