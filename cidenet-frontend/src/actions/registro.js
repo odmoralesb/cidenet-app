@@ -19,6 +19,7 @@ export function updateInputs(path, value) {
 export const registrar = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
     const empleado = getState().registro.get('empleado').toJS();
+    console.log('# empleado', empleado);
     axios
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {

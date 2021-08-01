@@ -4,7 +4,9 @@ import Immutable from 'immutable';
 const INITIAL_STATE = Immutable.fromJS({
     empleado: {
         primer_apellido: null,
-        segundo_apellido: null
+        segundo_apellido: null,
+        primer_nombre: null,
+        otros_nombres: null
     }
 });
 

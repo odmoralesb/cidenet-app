@@ -65,6 +65,50 @@ class Registro extends Component {
                         />
                     </div>
 
+                    <div className="col-md-4">
+                        <label htmlFor="primer_nombre" className="form-label">
+                            Primer nombre
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="primer_nombre"
+                            value={
+                                empleado.get('primer_nombre')
+                                    ? empleado.get('primer_nombre')
+                                    : ''
+                            }
+                            onChange={(e) =>
+                                this.props.updateInputs(
+                                    'empleado.primer_nombre',
+                                    e.target.value.toUpperCase()
+                                )
+                            }
+                        />
+                    </div>
+
+                    <div className="col-md-4 mt-2">
+                        <label htmlFor="otros_nombres" className="form-label">
+                            Otros nombres
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="otros_nombres"
+                            value={
+                                empleado.get('otros_nombres')
+                                    ? empleado.get('otros_nombres')
+                                    : ''
+                            }
+                            onChange={(e) =>
+                                this.props.updateInputs(
+                                    'empleado.otros_nombres',
+                                    e.target.value.toUpperCase()
+                                )
+                            }
+                        />
+                    </div>
+
                     <div className="col-12 mt-5">
                         <button className="btn btn-primary" type="submit">
                             Registrar
