@@ -4,8 +4,8 @@ const bcryptjs = require('bcryptjs');
 
 const empleadosPost = async (req, res = response) => {
     //
-    const { primer_apellido } = req.body;
-    const empleado = new Empleado({ primer_apellido });
+    const { primer_apellido, segundo_apellido } = req.body;
+    const empleado = new Empleado({ primer_apellido, segundo_apellido });
 
     // Guardar en BD
     await empleado.save();

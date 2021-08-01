@@ -3,23 +3,22 @@ import Immutable from 'immutable';
 
 const INITIAL_STATE = Immutable.fromJS({
     empleado: {
-        primer_apellido: null
+        primer_apellido: null,
+        segundo_apellido: null
     }
 });
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case types.LANZAR_MENSAJE_TOAST:
-            return state;
-
         case types.MODIFICAR_INPUTS_REGISTRO:
-            const value = action.payload.value
-                ? action.payload.value.toUpperCase()
-                : '';
             state = state.setIn(
                 `${action.payload.path}`.split('.'),
-                Immutable.fromJS(value)
+                Immutable.fromJS(action.payload.value)
             );
+            return state;
+
+        case types.REGISTRO_REALIZADO:
+            state = INITIAL_STATE;
             return state;
 
         default:

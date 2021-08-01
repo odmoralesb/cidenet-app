@@ -10,7 +10,7 @@ export function updateInputs(path, value) {
             type: types.MODIFICAR_INPUTS_REGISTRO,
             payload: {
                 path,
-                value: value == '' ? null : value
+                value: value === '' ? null : value
             }
         });
     };
@@ -23,11 +23,16 @@ export const registrar = () => async (dispatch, getState) => {
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {
             console.log('registro de empleado', response);
+            dispatch({ type: types.REGISTRO_REALIZADO });
+            mostrarMensaje(dispatch, {
+                tipo: 'success',
+                descripcion: 'Registro realizado con exito'
+            });
         })
         .catch((err) => {
             const errors = err.response.data.errors;
             errors.map((x) => {
-                mostrarMensaje(dispatch, {
+                return mostrarMensaje(dispatch, {
                     tipo: 'danger',
                     descripcion: x.msg
                 });

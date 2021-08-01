@@ -24,6 +24,18 @@ router.post(
             'primer_apellido',
             'El primer apellido debe ser todo en mayusculas sin acentos ni ñ'
         ).matches(/^[A-Z]+$/),
+        // Validacion Segundo apellido
+        check('segundo_apellido', 'El segundo apellido es obligatorio')
+            .not()
+            .isEmpty(),
+        check(
+            'segundo_apellido',
+            'El segundo apellido debe ser igual o menor a 20 letras'
+        ).isLength({ max: 20 }),
+        check(
+            'segundo_apellido',
+            'El segundo apellido debe ser todo en mayusculas sin acentos ni ñ'
+        ).matches(/^[A-Z]+$/),
         validarCampos
     ],
     empleadosPost

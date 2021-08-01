@@ -4,7 +4,11 @@ const empleadoSchema = Schema({
     primer_apellido: {
         type: String,
         required: [true, 'El primer apellido es obligatorio']
-    }
+    },
+    segundo_apellido: {
+        type: String,
+        required: [true, 'El segundo apellido es obligatorio']
+    }    
 });
 
 empleadoSchema.methods.toJSON = function () {

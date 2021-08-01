@@ -34,11 +34,37 @@ class Registro extends Component {
                             onChange={(e) =>
                                 this.props.updateInputs(
                                     'empleado.primer_apellido',
-                                    e.target.value
+                                    e.target.value.toUpperCase()
                                 )
                             }
                         />
                     </div>
+
+                    <div className="col-md-4">
+                        <label
+                            htmlFor="segundo_apellido"
+                            className="form-label"
+                        >
+                            Segundo apellido
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="segundo_apellido"
+                            value={
+                                empleado.get('segundo_apellido')
+                                    ? empleado.get('segundo_apellido')
+                                    : ''
+                            }
+                            onChange={(e) =>
+                                this.props.updateInputs(
+                                    'empleado.segundo_apellido',
+                                    e.target.value.toUpperCase()
+                                )
+                            }
+                        />
+                    </div>
+
                     <div className="col-12 mt-5">
                         <button className="btn btn-primary" type="submit">
                             Registrar
