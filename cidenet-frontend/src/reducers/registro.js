@@ -27,7 +27,11 @@ export default function (state = INITIAL_STATE, action) {
             return state;
 
         case types.REGISTRO_REALIZADO:
+            const paises = state.get('paises');
+            const tipo_identificaciones = state.get('tipo_identificaciones');
             state = INITIAL_STATE;
+            state = state.set('paises', paises);
+            state = state.set('tipo_identificaciones', tipo_identificaciones);
             return state;
 
         case types.OBTENER_PAISES:

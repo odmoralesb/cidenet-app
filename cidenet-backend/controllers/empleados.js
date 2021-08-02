@@ -33,6 +33,31 @@ const empleadosPost = async (req, res = response) => {
     });
 };
 
+const empleadosGet = async (req = request, res = response) => {
+    //
+
+    const { limite = 10, desde = 0 } = req.query;
+
+    const [total, empleados] = await Promise.all([
+        Empleado.countDocuments(),
+        Empleado.find().skip(Number(desde)).limit(Number(limite))
+    ]);
+
+    const params = req.res.json({
+        total,
+        empleados
+    });
+};
+
+const empleadosDelete = async (req, res = response) => {
+    //
+    const { id } = req.params;
+    const empleado = await Empleado.findByIdAndDelete(id);
+    res.json(empleado);
+};
+
 module.exports = {
-    empleadosPost
+    empleadosPost,
+    empleadosGet,
+    empleadosDelete
 };

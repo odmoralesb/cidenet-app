@@ -14,7 +14,6 @@ class Registro extends Component {
     componentWillMount() {
         this.props.getPaises();
         this.props.getTipoIdentificaciones();
-        //this.props.getCorreosSimilares();
     }
 
     setCorreo = (primer_nombre, primer_apellido) => {
@@ -52,8 +51,8 @@ class Registro extends Component {
         const dominio =
             this.props.empleado.get('pais') &&
             this.props.empleado.get('pais').toUpperCase() === 'COLOMBIA'
-                ? 'cidenet.com.co'
-                : 'cidenet.com.us';
+                ? 'cidenet.com.us'
+                : 'cidenet.com.co';
 
         this.props.updateInputs(
             'empleado.correo',

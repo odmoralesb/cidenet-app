@@ -10,7 +10,11 @@ const {
     existeIdentificacion
 } = require('../helpers/db-validators');
 
-const { empleadosPost } = require('../controllers/empleados');
+const {
+    empleadosPost,
+    empleadosGet,
+    empleadosDelete
+} = require('../controllers/empleados');
 
 const router = Router();
 
@@ -28,7 +32,7 @@ router.post(
         check(
             'primer_apellido',
             'El campo primer apellido debe ser todo en mayusculas sin acentos ni ñ'
-        ).matches(/^[A-Z]+$/),
+        ).matches(/^[A-Z\s]+$/),
         // Validacion Segundo apellido
         check('segundo_apellido', 'El campo segundo apellido es obligatorio')
             .not()
@@ -40,7 +44,7 @@ router.post(
         check(
             'segundo_apellido',
             'El campo segundo apellido debe ser todo en mayusculas sin acentos ni ñ'
-        ).matches(/^[A-Z]+$/),
+        ).matches(/^[A-Z\s]+$/),
         // Validacion Primer nombre
         check('primer_nombre', 'El campo primer nombre es obligatorio')
             .not()
@@ -100,6 +104,14 @@ router.post(
         validarCampos
     ],
     empleadosPost
+);
+
+router.get('/', empleadosGet);
+
+router.delete(
+    '/:id',
+    [check('id', 'No es un ID válido').isMongoId(), validarCampos],
+    empleadosDelete
 );
 
 module.exports = router;

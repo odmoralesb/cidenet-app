@@ -101,21 +101,6 @@ class Layout extends Component {
                                         Registrar
                                     </Link>
                                 </li>
-                                <li
-                                    className="nav-item"
-                                    onClick={() =>
-                                        this.activeLink('actualizar')
-                                    }
-                                >
-                                    <Link
-                                        to="/actualizar"
-                                        className={`nav-link ${this.activedLink(
-                                            'actualizar'
-                                        )}`}
-                                    >
-                                        Actualizar
-                                    </Link>
-                                </li>
                             </ul>
                         </div>
                     </div>
