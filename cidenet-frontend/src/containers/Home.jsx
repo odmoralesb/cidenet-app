@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom';
 
 // Acciones
 import {
@@ -105,11 +107,6 @@ class Home extends Component {
                                                 <td className="text-center">
                                                     <button
                                                         className="btn btn-danger"
-                                                        // onClick={() =>
-                                                        //     this.props.deleteEmpleados(
-                                                        //         x.get('uid')
-                                                        //     )
-                                                        // }
                                                         onClick={() =>
                                                             this.selectId(
                                                                 x.get('uid')
@@ -118,8 +115,18 @@ class Home extends Component {
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#exampleModal"
                                                     >
-                                                        X
+                                                        <FontAwesome name="trash" />
                                                     </button>
+
+                                                    <Link
+                                                        class="btn btn-primary ml-2"
+                                                        to={`/actualizar/${x.get(
+                                                            'uid'
+                                                        )}`}
+                                                        role="button"
+                                                    >
+                                                        <FontAwesome name="edit" />
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         );

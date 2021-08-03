@@ -18,7 +18,7 @@ export function updateInputs(path, value) {
 
 export const registrar = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
-    const empleado = getState().registro.get('empleado').toJS();
+    const empleado = getState().empleado.get('info').toJS();
     axios
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {
@@ -84,7 +84,7 @@ export const getCorreosSimilares = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
 
     const { primer_nombre, primer_apellido } = getState()
-        .registro.get('empleado')
+        .empleado.get('info')
         .toJS();
 
     let apellido = primer_apellido;

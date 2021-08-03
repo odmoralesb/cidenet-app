@@ -2,10 +2,25 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 // Acciones
+import { registrar } from '../actions/empleado';
 
-class Actualizacion extends Component {
+// Componentes
+import Empleado from '../components/empleado';
+
+class Registro extends Component {
+    registrar = (e) => {
+        e.preventDefault();
+        this.props.registrar();
+    };
+
     render() {
-        return <Fragment>Actualizacion funcionando ...</Fragment>;
+        return (
+            <Fragment>
+                <h4>Actualizacion de empleado</h4>
+                <hr />
+                <Empleado accion={this.registrar} />
+            </Fragment>
+        );
     }
 }
 
@@ -14,7 +29,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        registrar: () => dispatch(registrar())
+    };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actualizacion);
+export default connect(mapStateToProps, mapDispatchToProps)(Registro);

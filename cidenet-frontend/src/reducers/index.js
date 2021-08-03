@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import layoutReducer from './layout';
 import empleadosReducer from './empleados';
-import registroReducer from './registro';
+import empleadoReducer from './empleado';
 
 const appReducer = combineReducers({
     empleados: empleadosReducer,
-    registro: registroReducer,
+    empleado: empleadoReducer,
     layout: layoutReducer
 });
 

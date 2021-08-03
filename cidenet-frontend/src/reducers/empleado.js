@@ -2,7 +2,7 @@ import * as types from '../actions/types';
 import Immutable from 'immutable';
 
 const INITIAL_STATE = Immutable.fromJS({
-    empleado: {
+    info: {
         primer_apellido: null,
         segundo_apellido: null,
         primer_nombre: null,
