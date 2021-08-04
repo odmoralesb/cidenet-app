@@ -1,8 +1,13 @@
 const { Router } = require('express');
-const { buscarCorreoGet } = require('../controllers/buscar');
+const {
+    buscarCorreoGet,
+    buscarUsuariosPost
+} = require('../controllers/buscar');
 
 const router = Router();
 
 router.get('/correo/:termino', buscarCorreoGet);
+
+router.post('/empleados', buscarUsuariosPost);
 
 module.exports = router;

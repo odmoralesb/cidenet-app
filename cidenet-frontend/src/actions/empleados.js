@@ -19,7 +19,7 @@ export function updateInputs(path, value) {
 
 export const getEmpleados = (page = 1, size = 10) => async (dispatch) => {
     const axios = createAxiosInstance();
-    const from = (page - 1) * size + 1;
+    const from = (page - 1) * size;
     axios
         .get(`${API_URL}/empleados?desde=${from}&limite=${size}`)
         .then((response) => {
@@ -56,6 +56,42 @@ export const deleteEmpleados = (id) => async (dispatch, getState) => {
         })
         .catch((err) => {
             const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const buscarEmpleados = (
+    page = 1,
+    size = 10,
+    filtro = { termino: '', identificacion: '' }
+) => async (dispatch) => {
+    const axios = createAxiosInstance();
+    const from = (page - 1) * size;
+    axios
+        .post(
+            `${API_URL}/buscar/empleados?desde=${from}&limite=${size}`,
+            filtro
+        )
+        .then((response) => {
+            const data = response.data;
+            dispatch({
+                type: types.OBTENER_EMPLEADOS,
+                payload: {
+                    data: response.data.empleados,
+                    total: response.data.total,
+                    page,
+                    size
+                }
+            });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            console.log(err.response);
             errors.map((x) => {
                 return mostrarMensaje(dispatch, {
                     tipo: 'danger',

@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 
+// Componentes
+import Busqueda from '../components/busqueda';
+import Paginacion from '../components/paginacion';
+
 // Acciones
-import {
-    updateInputs,
-    getEmpleados,
-    deleteEmpleados
-} from '../actions/empleados';
+import { getEmpleados, deleteEmpleados } from '../actions/empleados';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedId: null
+            selectedId: null,
+            triggerPager: this.props.getEmpleados
         };
     }
     componentWillMount() {
@@ -25,47 +26,23 @@ class Home extends Component {
         this.setState({ selectedId: id });
     };
 
-    next = () => {
-        const { page, size } = this.props.pagination.toJS();
-        this.props.getEmpleados(page + 1, size);
-    };
-
-    previous = () => {
-        const { page, size } = this.props.pagination.toJS();
-        this.props.getEmpleados(page - 1, size);
-    };
-
     render() {
-        const { empleados } = this.props;
+        const { empleados, busqueda } = this.props;
         return (
             <Fragment>
                 <h4>Lista de empleados</h4>
                 <hr />
 
-                <div className="row">
-                    <div className="col-12">
-                        <nav aria-label="Page navigation example">
-                            <ul className="pagination">
-                                <li className="page-item">
-                                    <a
-                                        className="page-link"
-                                        href="#"
-                                        onClick={() => this.previous()}
-                                    >
-                                        Previous
-                                    </a>
-                                </li>
-                                <li className="page-item">
-                                    <a
-                                        className="page-link"
-                                        href="#"
-                                        onClick={() => this.next()}
-                                    >
-                                        Next
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                <div className="row" style={{ width: '100%' }}>
+                    <div className="col-4">
+                        <Paginacion
+                            pagination={this.props.pagination}
+                            trigger={this.state.triggerPager}
+                            filter={busqueda}
+                        />
+                    </div>
+                    <div className="col-8">
+                        <Busqueda />
                     </div>
                 </div>
 
@@ -148,7 +125,7 @@ class Home extends Component {
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-body">
-                                {this.state.selectedId}
+                                ¿ esta seguro de eliminar este empleado ?
                             </div>
                             <div className="modal-footer">
                                 <button
@@ -182,7 +159,8 @@ class Home extends Component {
 function mapStateToProps(state) {
     return {
         empleados: state.empleados.get('data'),
-        pagination: state.empleados.get('pagination')
+        pagination: state.empleados.get('pagination'),
+        busqueda: state.empleados.get('busqueda')
     };
 }
 

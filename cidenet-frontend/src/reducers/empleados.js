@@ -3,6 +3,10 @@ import Immutable from 'immutable';
 
 const INITIAL_STATE = Immutable.fromJS({
     data: [],
+    busqueda: {
+        termino: null,
+        identificacion: null
+    },
     pagination: {
         page: 1,
         total: 0,
