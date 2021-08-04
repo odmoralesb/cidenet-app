@@ -1,0 +1,92 @@
+[{
+  "_id": {
+    "$oid": "610709b01988830e9c9c76a8"
+  },
+  "primer_apellido": "MORALES",
+  "segundo_apellido": "BLANCO",
+  "primer_nombre": "OTNIEL",
+  "otros_nombres": "DAVID",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de ciudadania",
+  "identificacion": "526212",
+  "correo": "OTNIEL.MORALES@cidenet.com.co",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61074703cf32d64b905ef2c5"
+  },
+  "primer_apellido": "LEON",
+  "segundo_apellido": "PINO",
+  "primer_nombre": "LUIS",
+  "otros_nombres": "ALBERTO",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de extranjeria",
+  "identificacion": "53324566",
+  "correo": "LUIS.LEON@cidenet.com.us",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61074763cf32d64b905ef2c6"
+  },
+  "primer_apellido": "ROMANO",
+  "segundo_apellido": "CANTOR",
+  "primer_nombre": "JESUS",
+  "otros_nombres": "ARMANDO",
+  "pais": "Colombia",
+  "tipo_identificacion": "Pasaporte",
+  "identificacion": "64543222",
+  "correo": "JESUS.ROMANO@cidenet.com.us",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61076bc399657910d0128bbb"
+  },
+  "primer_apellido": "PAZ CASTILLO",
+  "segundo_apellido": "MORALES",
+  "primer_nombre": "JULIO",
+  "otros_nombres": "JOSE",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de extranjeria",
+  "identificacion": "456557",
+  "correo": "JULIO.PAZCASTILLO@cidenet.com.co",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6107778899fa1d5284e54082"
+  },
+  "primer_apellido": "CAGE",
+  "segundo_apellido": "JONES",
+  "primer_nombre": "NATALIA",
+  "otros_nombres": "DRASKOBY",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de extranjeria",
+  "identificacion": "977897",
+  "correo": "NATALIA.CAGE@cidenet.com.co",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6109b2de49febe034c996258"
+  },
+  "primer_apellido": "GALICIA",
+  "segundo_apellido": "MAYORCA",
+  "primer_nombre": "BELKIS",
+  "otros_nombres": "ANDREA",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de ciudadania",
+  "identificacion": "454545",
+  "correo": "BELKIS.GALICIA@cidenet.com.co",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6109cf4b49febe034c996259"
+  },
+  "primer_apellido": "PEREZ",
+  "segundo_apellido": "MARTIN",
+  "primer_nombre": "JOSE",
+  "otros_nombres": "JAVIER",
+  "pais": "Colombia",
+  "tipo_identificacion": "Cedula de ciudadania",
+  "identificacion": "645453232",
+  "correo": "JOSE.PEREZ@cidenet.com.co",
+  "__v": 0
+}]

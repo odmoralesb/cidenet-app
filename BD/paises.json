@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "61069c34ffffae3e8e9996b4"
+  },
+  "id": 1,
+  "nombre": "Colombia"
+},{
+  "_id": {
+    "$oid": "6106a22dffffae3e8e9996b5"
+  },
+  "id": 2,
+  "nombre": "Estados Unidos"
+}]

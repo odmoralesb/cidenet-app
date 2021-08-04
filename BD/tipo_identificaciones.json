@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "6106b519ffffae3e8e9996b6"
+  },
+  "id": 1,
+  "nombre": "Cedula de ciudadania"
+},{
+  "_id": {
+    "$oid": "6106b5b3ffffae3e8e9996b7"
+  },
+  "id": 2,
+  "nombre": "Cedula de extranjeria"
+},{
+  "_id": {
+    "$oid": "6106b60dffffae3e8e9996b8"
+  },
+  "id": 3,
+  "nombre": "Pasaporte"
+},{
+  "_id": {
+    "$oid": "6106b63fffffae3e8e9996b9"
+  },
+  "id": 4,
+  "nombre": "Permiso especial"
+}]
