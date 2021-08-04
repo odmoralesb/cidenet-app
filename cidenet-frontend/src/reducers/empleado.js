@@ -11,6 +11,8 @@ const INITIAL_STATE = Immutable.fromJS({
         tipo_identificacion: null,
         identificacion: null,
         correo: null,
+        fechaIngreso: null,
+        fechaRegistro: null,
         uid: null
     },
     paises: [],

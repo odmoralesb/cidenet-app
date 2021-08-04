@@ -104,6 +104,11 @@ class Empleado extends Component {
         }
     };
 
+    getFecha = (fecha) => {
+        fecha = fecha.split('T');
+        return fecha[0];
+    };
+
     render() {
         const { info, paises, tipo_identificaciones } = this.props;
 
@@ -326,6 +331,51 @@ class Empleado extends Component {
                                         'info.correo',
                                         e.target.value
                                     )
+                                }
+                                disabled
+                            />
+                        </div>
+
+                        <div className="col-md-4">
+                            <label htmlFor="correo" className="form-label">
+                                Fecha Ingreso
+                            </label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                id="fechaIngreso"
+                                value={
+                                    info.get('fechaIngreso')
+                                        ? this.getFecha(
+                                              info.get('fechaIngreso')
+                                          )
+                                        : ''
+                                }
+                                onChange={(e) =>
+                                    this.props.updateInputs(
+                                        'info.fechaIngreso',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row mt-2">
+                        <div className="col-md-4">
+                            <label htmlFor="correo" className="form-label">
+                                Fecha Registro
+                            </label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                id="fechaRegistro"
+                                value={
+                                    info.get('fechaRegistro')
+                                        ? this.getFecha(
+                                              info.get('fechaRegistro')
+                                          )
+                                        : ''
                                 }
                                 disabled
                             />

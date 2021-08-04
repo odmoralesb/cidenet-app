@@ -8,7 +8,8 @@ const {
     esTipoIdentificacionValido,
     existeCorreo,
     existeIdentificacion,
-    existeEmpleadoPorID
+    existeEmpleadoPorID,
+    fechaIngresoValida
 } = require('../helpers/db-validators');
 
 const {
@@ -104,6 +105,7 @@ router.post(
         validarCampos,
         check('pais').custom(esPaisValido),
         check('tipo_identificacion').custom(esTipoIdentificacionValido),
+        check('fechaIngreso').custom(fechaIngresoValida),
         validarCampos
     ],
     empleadosPost
@@ -126,6 +128,7 @@ router.put(
     [
         check('id', 'No es un ID válido').isMongoId(),
         check('id').custom(existeEmpleadoPorID),
+        check('fechaIngreso').custom(fechaIngresoValida),
         validarCampos
     ],
     empleadoPut
