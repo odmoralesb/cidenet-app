@@ -59,7 +59,7 @@ const empleadoGet = async (req = request, res = response) => {
 
 const empleadoPut = async (req, res = response) => {
     const { id } = req.params;
-    const { correo, ...resto } = req.body;
+    const { ...resto } = req.body;
     const empleado = await Empleado.findByIdAndUpdate(id, resto, { new: true });
     res.status(200).json(empleado);
 };
