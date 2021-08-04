@@ -20,7 +20,7 @@ class Empleado extends Component {
         }
     }
 
-    setCorreo = (primer_nombre, primer_apellido) => {
+    setCorreo = (primer_nombre, primer_apellido, pais) => {
         let apellido = primer_apellido.split(' ');
 
         const correos_similares = this.props.correos_similares
@@ -53,10 +53,9 @@ class Empleado extends Component {
         }
 
         const dominio =
-            this.props.info.get('pais') &&
-            this.props.info.get('pais').toUpperCase() === 'COLOMBIA'
-                ? 'cidenet.com.us'
-                : 'cidenet.com.co';
+            pais.toUpperCase() === 'COLOMBIA'
+                ? 'cidenet.com.co'
+                : 'cidenet.com.us';
 
         this.props.updateInputs(
             'info.correo',
@@ -81,7 +80,8 @@ class Empleado extends Component {
             ) {
                 this.setCorreo(
                     empleado_next.primer_nombre,
-                    empleado_next.primer_apellido
+                    empleado_next.primer_apellido,
+                    empleado_next.pais
                 );
             } else {
                 this.props.updateInputs('info.correo', null);

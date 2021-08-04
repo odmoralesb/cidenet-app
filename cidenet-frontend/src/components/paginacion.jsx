@@ -10,11 +10,6 @@ function Paginacion({ pagination, trigger, filter }) {
         const { page, size } = pagination.toJS();
         trigger(page - 1, size);
     };
-    console.log('# page', pagination);
-    console.log(
-        '# pagina:  ',
-        Math.ceil(pagination.get('total') / pagination.get('size'))
-    );
 
     return (
         <Fragment>
