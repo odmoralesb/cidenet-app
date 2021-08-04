@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // Acciones
 import {
     updateInputs,
-    registrar,
     getPaises,
     getTipoIdentificaciones,
     getCorreosSimilares,
@@ -94,9 +93,15 @@ class Empleado extends Component {
         this.props.limpiar();
     }
 
-    registrar = (e) => {
+    accion = (e) => {
         e.preventDefault();
-        this.props.registrar();
+        if (this.props.id) {
+            //Actualizar
+            this.props.accion(this.props.id);
+        } else {
+            // Registrar
+            this.props.accion();
+        }
     };
 
     render() {
@@ -104,7 +109,7 @@ class Empleado extends Component {
 
         return (
             <Fragment>
-                <form onSubmit={(e) => this.registrar(e)}>
+                <form onSubmit={(e) => this.accion(e)}>
                     <div className="row">
                         <div className="col-md-4">
                             <label
@@ -330,7 +335,7 @@ class Empleado extends Component {
                     <div className="row mt-2">
                         <div className="col-12 mt-5">
                             <button className="btn btn-primary" type="submit">
-                                Registrar
+                                {this.props.id ? 'Actualizar' : 'Registrar'}
                             </button>
                         </div>
                     </div>
@@ -352,7 +357,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         updateInputs: (path, value) => dispatch(updateInputs(path, value)),
-        registrar: () => dispatch(registrar()),
         getPaises: () => dispatch(getPaises()),
         getTipoIdentificaciones: () => dispatch(getTipoIdentificaciones()),
         getCorreosSimilares: () => dispatch(getCorreosSimilares()),

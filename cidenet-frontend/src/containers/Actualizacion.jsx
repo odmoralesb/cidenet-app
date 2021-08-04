@@ -2,24 +2,19 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 // Acciones
-import { registrar } from '../actions/empleado';
+import { actualizar } from '../actions/empleado';
 
 // Componentes
 import Empleado from '../components/empleado';
 
 class Registro extends Component {
-    registrar = (e) => {
-        e.preventDefault();
-        this.props.registrar();
-    };
-
     render() {
         return (
             <Fragment>
-                <h4>Actualizacion de empleado</h4>
+                <h4>Actualización de empleado</h4>
                 <hr />
                 <Empleado
-                    accion={this.registrar}
+                    accion={this.props.actualizar}
                     id={this.props.match.params.id}
                 />
             </Fragment>
@@ -33,7 +28,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        registrar: () => dispatch(registrar())
+        actualizar: (id) => dispatch(actualizar(id))
     };
 }
 

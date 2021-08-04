@@ -28,7 +28,7 @@ const empleadosPost = async (req, res = response) => {
     // Guardar en BD
     await empleado.save();
 
-    res.json({
+    res.status(201).json({
         empleado
     });
 };
@@ -57,6 +57,13 @@ const empleadoGet = async (req = request, res = response) => {
     //
 };
 
+const empleadoPut = async (req, res = response) => {
+    const { id } = req.params;
+    const { correo, ...resto } = req.body;
+    const empleado = await Empleado.findByIdAndUpdate(id, resto, { new: true });
+    res.status(200).json(empleado);
+};
+
 const empleadosDelete = async (req, res = response) => {
     //
     const { id } = req.params;
@@ -68,5 +75,6 @@ module.exports = {
     empleadosPost,
     empleadosGet,
     empleadoGet,
+    empleadoPut,
     empleadosDelete
 };

@@ -39,13 +39,37 @@ export const registrar = () => async (dispatch, getState) => {
         });
 };
 
-export const getEmpleado = (id) => async (dispatch, getState) => {
+export const getEmpleado = (id) => async (dispatch) => {
     const axios = createAxiosInstance();
     axios
         .get(`${API_URL}/empleados/${id}`)
         .then((response) => {
             const data = response.data;
             dispatch({ type: types.OBTENER_EMPLEADO, payload: data });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const actualizar = (id) => async (dispatch, getState) => {
+    const axios = createAxiosInstance();
+    const empleado = getState().empleado.get('info').toJS();
+    axios
+        .put(`${API_URL}/empleados/${id}`, empleado)
+        .then((response) => {
+            const data = response.data;
+            dispatch({ type: types.OBTENER_EMPLEADO, payload: data });
+            mostrarMensaje(dispatch, {
+                tipo: 'success',
+                descripcion: 'Actualizacion realizada con exito'
+            });
         })
         .catch((err) => {
             const errors = err.response.data.errors;

@@ -15,7 +15,8 @@ const {
     empleadosPost,
     empleadosGet,
     empleadoGet,
-    empleadosDelete
+    empleadosDelete,
+    empleadoPut
 } = require('../controllers/empleados');
 
 const router = Router();
@@ -118,6 +119,16 @@ router.get(
         validarCampos
     ],
     empleadoGet
+);
+
+router.put(
+    '/:id',
+    [
+        check('id', 'No es un ID válido').isMongoId(),
+        check('id').custom(existeEmpleadoPorID),
+        validarCampos
+    ],
+    empleadoPut
 );
 
 router.delete(

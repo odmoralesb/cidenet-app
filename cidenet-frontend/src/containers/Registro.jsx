@@ -8,17 +8,12 @@ import { registrar } from '../actions/empleado';
 import Empleado from '../components/empleado';
 
 class Registro extends Component {
-    registrar = (e) => {
-        e.preventDefault();
-        this.props.registrar();
-    };
-
     render() {
         return (
             <Fragment>
                 <h4>Registro de empleados</h4>
                 <hr />
-                <Empleado accion={this.registrar} />
+                <Empleado accion={this.props.registrar} />
             </Fragment>
         );
     }
