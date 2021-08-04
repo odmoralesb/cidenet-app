@@ -39,10 +39,41 @@ const existeEmpleadoPorID = async (id) => {
     }
 };
 
+const fechaIngresoValida = async (fechaIngreso) => {
+    const fechaIngresoInfo = fechaIngreso.split('-');
+    const anio = parseInt(fechaIngresoInfo[0]);
+    const mes = parseInt(fechaIngresoInfo[1]) - 1;
+    const fechanumm = parseInt(fechaIngresoInfo[2]);
+    fechaIngreso = new Date(anio, mes, fechanumm);
+
+    const actual = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
+    );
+
+    const hace1Mes = new Date(
+        actual.getFullYear(),
+        actual.getMonth() - 1,
+        actual.getDate()
+    );
+
+    if (!fechaIngreso) return;
+
+    if (fechaIngreso > actual) {
+        throw new Error(`La fecha no puede superar a la fecha actual`);
+    }
+
+    if (fechaIngreso < hace1Mes) {
+        throw new Error(`La fecha no puede ser inferior a mas de 1 mes`);
+    }
+};
+
 module.exports = {
     esPaisValido,
     esTipoIdentificacionValido,
     existeCorreo,
     existeIdentificacion,
-    existeEmpleadoPorID
+    existeEmpleadoPorID,
+    fechaIngresoValida
 };

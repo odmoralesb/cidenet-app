@@ -31,7 +31,9 @@ const empleadoSchema = Schema({
     correo: {
         type: String,
         required: [true, 'El correo es obligatorio']
-    }
+    },
+    fechaIngreso: { type: Date },
+    fechaRegistro: { type: Date, default: Date.now }
 });
 
 empleadoSchema.methods.toJSON = function () {

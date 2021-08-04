@@ -11,7 +11,8 @@ const empleadosPost = async (req, res = response) => {
         pais,
         tipo_identificacion,
         identificacion,
-        correo
+        correo,
+        fechaIngreso
     } = req.body;
 
     const empleado = new Empleado({
@@ -22,7 +23,8 @@ const empleadosPost = async (req, res = response) => {
         pais,
         tipo_identificacion,
         identificacion,
-        correo
+        correo,
+        fechaIngreso
     });
 
     // Guardar en BD
