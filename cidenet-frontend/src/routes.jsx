@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
+
 import Layout from './containers/Layout';
 import Home from './containers/Home';
 import Registro from './containers/Registro';

@@ -7,13 +7,18 @@ import {
     registrar,
     getPaises,
     getTipoIdentificaciones,
-    getCorreosSimilares
+    getCorreosSimilares,
+    getEmpleado,
+    limpiar
 } from '../actions/empleado';
 
 class Empleado extends Component {
     componentWillMount() {
         this.props.getPaises();
         this.props.getTipoIdentificaciones();
+        if (this.props.id) {
+            this.props.getEmpleado(this.props.id);
+        }
     }
 
     setCorreo = (primer_nombre, primer_apellido) => {
@@ -83,6 +88,10 @@ class Empleado extends Component {
                 this.props.updateInputs('info.correo', null);
             }
         }
+    }
+
+    componentWillUnmount() {
+        this.props.limpiar();
     }
 
     registrar = (e) => {
@@ -346,7 +355,9 @@ function mapDispatchToProps(dispatch) {
         registrar: () => dispatch(registrar()),
         getPaises: () => dispatch(getPaises()),
         getTipoIdentificaciones: () => dispatch(getTipoIdentificaciones()),
-        getCorreosSimilares: () => dispatch(getCorreosSimilares())
+        getCorreosSimilares: () => dispatch(getCorreosSimilares()),
+        getEmpleado: (id) => dispatch(getEmpleado(id)),
+        limpiar: () => dispatch(limpiar())
     };
 }
 

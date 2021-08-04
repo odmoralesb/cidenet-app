@@ -80,7 +80,9 @@ class Home extends Component {
                                     <th scope="col">Nombres</th>
                                     <th scope="col">Correo</th>
                                     <th scope="col">País</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" className="text-center">
+                                        Acciones
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -119,7 +121,7 @@ class Home extends Component {
                                                     </button>
 
                                                     <Link
-                                                        class="btn btn-primary ml-2"
+                                                        className="btn btn-primary ml-2"
                                                         to={`/actualizar/${x.get(
                                                             'uid'
                                                         )}`}

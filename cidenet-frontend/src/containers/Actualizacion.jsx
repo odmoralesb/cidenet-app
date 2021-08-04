@@ -18,7 +18,10 @@ class Registro extends Component {
             <Fragment>
                 <h4>Actualizacion de empleado</h4>
                 <hr />
-                <Empleado accion={this.registrar} />
+                <Empleado
+                    accion={this.registrar}
+                    id={this.props.match.params.id}
+                />
             </Fragment>
         );
     }

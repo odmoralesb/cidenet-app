@@ -32,9 +32,17 @@ const existeIdentificacion = async (identificacion = '') => {
     }
 };
 
+const existeEmpleadoPorID = async (id) => {
+    const existeEmpleado = await Empleado.findById(id);
+    if (!existeEmpleado) {
+        throw new Error(`El id de este empleado ${id} no existe`);
+    }
+};
+
 module.exports = {
     esPaisValido,
     esTipoIdentificacionValido,
     existeCorreo,
-    existeIdentificacion
+    existeIdentificacion,
+    existeEmpleadoPorID
 };

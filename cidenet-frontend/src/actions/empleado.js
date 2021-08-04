@@ -39,6 +39,29 @@ export const registrar = () => async (dispatch, getState) => {
         });
 };
 
+export const getEmpleado = (id) => async (dispatch, getState) => {
+    const axios = createAxiosInstance();
+    axios
+        .get(`${API_URL}/empleados/${id}`)
+        .then((response) => {
+            const data = response.data;
+            dispatch({ type: types.OBTENER_EMPLEADO, payload: data });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const limpiar = () => async (dispatch) => {
+    dispatch({ type: types.LIMPIAR_INFO });
+};
+
 export const getPaises = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
     axios

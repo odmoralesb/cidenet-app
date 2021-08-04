@@ -7,12 +7,14 @@ const {
     esPaisValido,
     esTipoIdentificacionValido,
     existeCorreo,
-    existeIdentificacion
+    existeIdentificacion,
+    existeEmpleadoPorID
 } = require('../helpers/db-validators');
 
 const {
     empleadosPost,
     empleadosGet,
+    empleadoGet,
     empleadosDelete
 } = require('../controllers/empleados');
 
@@ -107,6 +109,16 @@ router.post(
 );
 
 router.get('/', empleadosGet);
+
+router.get(
+    '/:id',
+    [
+        check('id', 'No es un ID válido').isMongoId(),
+        check('id').custom(existeEmpleadoPorID),
+        validarCampos
+    ],
+    empleadoGet
+);
 
 router.delete(
     '/:id',
