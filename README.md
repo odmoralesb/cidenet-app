@@ -40,6 +40,7 @@ La base de datos esta basada en MongoDB en una instancia publicada en linea para
 
 Se crearon las siguintes colecciones para almacenamiento de datos: 
 
+```
 empleados({
     primer_apellido: {
         type: String
@@ -87,3 +88,14 @@ tipo_identificaciones({
     }
 });
 
+Area({
+    id: {
+        type: Number,
+        required: [true, 'El id es obligatorio']
+    },
+    nombre: {
+        type: String,
+        required: [true, 'El nombre es obligatorio']
+    }
+});
+```

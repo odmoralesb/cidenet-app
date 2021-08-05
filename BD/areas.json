@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "610b3c503239ae45814d0382"
+  },
+  "id": 1,
+  "nombre": "Administracion"
+},{
+  "_id": {
+    "$oid": "610b3cac3239ae45814d0383"
+  },
+  "id": 2,
+  "nombre": "Financiera"
+},{
+  "_id": {
+    "$oid": "610b3cdd3239ae45814d0384"
+  },
+  "id": 3,
+  "nombre": "Compras"
+},{
+  "_id": {
+    "$oid": "610b3d0c3239ae45814d0385"
+  },
+  "id": 4,
+  "nombre": "Infraestructura"
+},{
+  "_id": {
+    "$oid": "610b3d3f3239ae45814d0386"
+  },
+  "id": 5,
+  "nombre": "Operacion"
+},{
+  "_id": {
+    "$oid": "610b3d633239ae45814d0387"
+  },
+  "id": 6,
+  "nombre": "Talento Humano"
+},{
+  "_id": {
+    "$oid": "610b3da13239ae45814d0388"
+  },
+  "id": 7,
+  "nombre": "Servicios Varios"
+}]
