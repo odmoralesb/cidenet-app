@@ -38,7 +38,8 @@ const empleadoSchema = Schema({
         required: true
     },
     fechaIngreso: { type: Date },
-    fechaRegistro: { type: Date, default: Date.now }
+    fechaRegistro: { type: Date, default: Date.now },
+    estado: { type: Boolean, default: true }
 });
 
 empleadoSchema.methods.toJSON = function () {

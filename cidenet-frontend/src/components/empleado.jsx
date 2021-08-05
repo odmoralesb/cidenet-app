@@ -107,20 +107,8 @@ class Empleado extends Component {
         }
     };
 
-    getFecha = (fecha) => {
-        fecha = fecha.split('T');
-        return fecha[0];
-    };
-
-    formatFecha = (fecha) => {
-        fecha = fecha.split('T');
-        return fecha[0];
-    };
-
     render() {
         const { info, paises, tipo_identificaciones, areas } = this.props;
-
-        console.log('# info: ', info);
 
         return (
             <Fragment>
@@ -425,6 +413,25 @@ class Empleado extends Component {
                                         );
                                     })}
                             </select>
+                        </div>
+
+                        <div className="col-md-4">
+                            <span
+                                className={`${
+                                    info.get('estado')
+                                        ? 'badge bg-primary'
+                                        : 'badge bg-secondary'
+                                }`}
+                                style={{
+                                    height: '25px',
+                                    width: '100px',
+                                    marginTop: '40px',
+                                    color: 'white',
+                                    paddingTop: '7px'
+                                }}
+                            >
+                                {info.get('estado') ? 'Activo' : 'Inactivo'}
+                            </span>
                         </div>
                     </div>
 

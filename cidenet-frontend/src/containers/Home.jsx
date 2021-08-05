@@ -78,9 +78,11 @@ class Home extends Component {
                                                 )}`}</td>
                                                 <td>{`${x.get(
                                                     'primer_nombre'
-                                                )} ${x.get(
-                                                    'otros_nombres'
-                                                )}`}</td>
+                                                )} ${
+                                                    x.get('otros_nombres')
+                                                        ? x.get('otros_nombres')
+                                                        : ''
+                                                }`}</td>
                                                 <td>{x.get('correo')}</td>
                                                 <td>{x.get('pais')}</td>
                                                 <td className="text-center">

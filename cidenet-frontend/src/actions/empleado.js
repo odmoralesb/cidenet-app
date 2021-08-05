@@ -19,6 +19,7 @@ export function updateInputs(path, value) {
 export const registrar = () => async (dispatch, getState) => {
     const axios = createAxiosInstance();
     const empleado = getState().empleado.get('info').toJS();
+    empleado.area = empleado.area.uid;
     axios
         .post(`${API_URL}/empleados`, empleado)
         .then((response) => {
@@ -29,13 +30,20 @@ export const registrar = () => async (dispatch, getState) => {
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -48,13 +56,20 @@ export const getEmpleado = (id) => async (dispatch) => {
             dispatch({ type: types.OBTENER_EMPLEADO, payload: data });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -73,13 +88,20 @@ export const actualizar = (id) => async (dispatch, getState) => {
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -96,13 +118,20 @@ export const getPaises = () => async (dispatch, getState) => {
             dispatch({ type: types.OBTENER_PAISES, payload: data });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -118,13 +147,20 @@ export const getTipoIdentificaciones = () => async (dispatch) => {
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -140,13 +176,20 @@ export const getAreas = () => async (dispatch) => {
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 

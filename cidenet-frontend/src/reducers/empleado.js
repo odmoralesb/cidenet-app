@@ -14,7 +14,9 @@ const INITIAL_STATE = Immutable.fromJS({
         fechaIngreso: null,
         fechaRegistro: null,
         uid: null,
-        area: null
+        area: {
+            uid: null
+        }
     },
     paises: [],
     tipo_identificaciones: [],
@@ -34,9 +36,11 @@ export default function (state = INITIAL_STATE, action) {
         case types.REGISTRO_REALIZADO:
             const paises = state.get('paises');
             const tipo_identificaciones = state.get('tipo_identificaciones');
+            const areas = state.get('areas');
             state = INITIAL_STATE;
             state = state.set('paises', paises);
             state = state.set('tipo_identificaciones', tipo_identificaciones);
+            state = state.set('areas', areas);
             return state;
 
         case types.OBTENER_EMPLEADO:
