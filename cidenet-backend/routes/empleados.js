@@ -106,6 +106,7 @@ router.post(
         check('pais').custom(esPaisValido),
         check('tipo_identificacion').custom(esTipoIdentificacionValido),
         check('fechaIngreso').custom(fechaIngresoValida),
+        check('area', 'El campo area es obligatorio').not().isEmpty(),
         validarCampos
     ],
     empleadosPost

@@ -12,7 +12,8 @@ const empleadosPost = async (req, res = response) => {
         tipo_identificacion,
         identificacion,
         correo,
-        fechaIngreso
+        fechaIngreso,
+        area
     } = req.body;
 
     const empleado = new Empleado({
@@ -24,7 +25,8 @@ const empleadosPost = async (req, res = response) => {
         tipo_identificacion,
         identificacion,
         correo,
-        fechaIngreso
+        fechaIngreso,
+        area
     });
 
     // Guardar en BD
@@ -54,7 +56,7 @@ const empleadosGet = async (req = request, res = response) => {
 const empleadoGet = async (req = request, res = response) => {
     //
     const { id } = req.params;
-    const empleado = await Empleado.findById(id);
+    const empleado = await Empleado.findById(id).populate('area', 'nombre');
     res.status(200).json(empleado);
     //
 };

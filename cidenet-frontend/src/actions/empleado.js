@@ -61,6 +61,7 @@ export const getEmpleado = (id) => async (dispatch) => {
 export const actualizar = (id) => async (dispatch, getState) => {
     const axios = createAxiosInstance();
     const empleado = getState().empleado.get('info').toJS();
+    empleado.area = empleado.area.uid;
     axios
         .put(`${API_URL}/empleados/${id}`, empleado)
         .then((response) => {
@@ -105,7 +106,7 @@ export const getPaises = () => async (dispatch, getState) => {
         });
 };
 
-export const getTipoIdentificaciones = () => async (dispatch, getState) => {
+export const getTipoIdentificaciones = () => async (dispatch) => {
     const axios = createAxiosInstance();
     axios
         .get(`${API_URL}/tipoidentificaciones`)
@@ -113,6 +114,28 @@ export const getTipoIdentificaciones = () => async (dispatch, getState) => {
             const data = response.data.tipo_identificacones;
             dispatch({
                 type: types.OBTENER_TIPO_IDENTIFICACIONES,
+                payload: data
+            });
+        })
+        .catch((err) => {
+            const errors = err.response.data.errors;
+            errors.map((x) => {
+                return mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: x.msg
+                });
+            });
+        });
+};
+
+export const getAreas = () => async (dispatch) => {
+    const axios = createAxiosInstance();
+    axios
+        .get(`${API_URL}/areas`)
+        .then((response) => {
+            const data = response.data.areas;
+            dispatch({
+                type: types.OBTENER_AREAS,
                 payload: data
             });
         })

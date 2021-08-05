@@ -13,10 +13,12 @@ const INITIAL_STATE = Immutable.fromJS({
         correo: null,
         fechaIngreso: null,
         fechaRegistro: null,
-        uid: null
+        uid: null,
+        area: null
     },
     paises: [],
     tipo_identificaciones: [],
+    areas: [],
     correos_similares: []
 });
 
@@ -50,6 +52,10 @@ export default function (state = INITIAL_STATE, action) {
                 'tipo_identificaciones',
                 Immutable.fromJS(action.payload)
             );
+            return state;
+
+        case types.OBTENER_AREAS:
+            state = state.set('areas', Immutable.fromJS(action.payload));
             return state;
 
         case types.OBTENER_CORREOS_SIMILARES:

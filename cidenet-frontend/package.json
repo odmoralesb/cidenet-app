@@ -6,6 +6,7 @@
         "axios": "^0.19.2",
         "bootstrap": "^4.6.0",
         "immutable": "^4.0.0-rc.14",
+        "moment": "^2.29.1",
         "react": "^16.14.0",
         "react-bootstrap": "^1.6.1",
         "react-dom": "^16.14.0",
