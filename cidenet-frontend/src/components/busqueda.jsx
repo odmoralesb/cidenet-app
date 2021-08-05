@@ -31,7 +31,7 @@ class Busqueda extends Component {
                             />
                         </div>
 
-                        <div className="col-5">
+                        <div className="col-4">
                             <input
                                 className="form-control me-2"
                                 type="search"
@@ -50,9 +50,17 @@ class Busqueda extends Component {
                             />
                         </div>
 
-                        <div className="col-1">
+                        <div className="col-2">
                             <button
-                                className="btn btn-outline-primary"
+                                type="button"
+                                className="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2"
+                            >
+                                :
+                            </button>
+                            <button
+                                className="btn btn-outline-primary ml-1"
                                 type="button"
                                 onClick={() =>
                                     this.props.buscarEmpleados(
@@ -66,7 +74,18 @@ class Busqueda extends Component {
                                                 'identificacion'
                                             )
                                                 ? busqueda.get('identificacion')
-                                                : ''
+                                                : '',
+                                            tipo_identificacion: busqueda.get(
+                                                'tipo_identificacion'
+                                            )
+                                                ? busqueda.get(
+                                                      'tipo_identificacion'
+                                                  )
+                                                : '',
+                                            pais: busqueda.get('pais')
+                                                ? busqueda.get('pais')
+                                                : '',
+                                            estado: busqueda.get('estado')
                                         }
                                     )
                                 }

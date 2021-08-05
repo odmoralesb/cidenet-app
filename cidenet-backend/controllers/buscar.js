@@ -11,7 +11,19 @@ const buscarCorreoGet = async (req, res = response) => {
 
 const buscarUsuariosPost = async (req, res = response) => {
     const { limite = 10, desde = 0 } = req.query;
-    const { termino, identificacion } = req.body;
+    const {
+        termino,
+        identificacion,
+        tipo_identificacion,
+        pais,
+        estado
+    } = req.body;
+
+    const andext = [];
+
+    if (tipo_identificacion !== '') andext.push({ tipo_identificacion });
+    if (pais !== '') andext.push({ pais });
+
     const regex = new RegExp(termino, 'i');
     const regexidn = new RegExp(identificacion, 'i');
 
@@ -24,7 +36,7 @@ const buscarUsuariosPost = async (req, res = response) => {
                 { segundo_apellido: regex },
                 { correo: regex }
             ],
-            $and: [{ identificacion: regexidn }]
+            $and: [{ estado }, { identificacion: regexidn }, ...andext]
         }),
         Empleado.find({
             $or: [
@@ -34,7 +46,7 @@ const buscarUsuariosPost = async (req, res = response) => {
                 { segundo_apellido: regex },
                 { correo: regex }
             ],
-            $and: [{ identificacion: regexidn }]
+            $and: [{ estado }, { identificacion: regexidn }, ...andext]
         })
             .skip(Number(desde))
             .limit(Number(limite))

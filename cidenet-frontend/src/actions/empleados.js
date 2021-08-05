@@ -17,6 +17,14 @@ export function updateInputs(path, value) {
     };
 }
 
+export function limpiarFiltro() {
+    return (dispatch) => {
+        dispatch({
+            type: types.LIMPIAR_FILTRO
+        });
+    };
+}
+
 export const getEmpleados = (page = 1, size = 10) => async (dispatch) => {
     const axios = createAxiosInstance();
     const from = (page - 1) * size;
@@ -35,14 +43,20 @@ export const getEmpleados = (page = 1, size = 10) => async (dispatch) => {
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            console.log(err.response);
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
@@ -55,20 +69,33 @@ export const deleteEmpleados = (id) => async (dispatch, getState) => {
             dispatch(getEmpleados(page, size));
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };
 
 export const buscarEmpleados = (
     page = 1,
     size = 10,
-    filtro = { termino: '', identificacion: '' }
+    filtro = {
+        termino: '',
+        identificacion: '',
+        tipo_identificacion: '',
+        pais: '',
+        estado: true
+    }
 ) => async (dispatch) => {
     const axios = createAxiosInstance();
     const from = (page - 1) * size;
@@ -90,13 +117,19 @@ export const buscarEmpleados = (
             });
         })
         .catch((err) => {
-            const errors = err.response.data.errors;
-            console.log(err.response);
-            errors.map((x) => {
-                return mostrarMensaje(dispatch, {
-                    tipo: 'danger',
-                    descripcion: x.msg
+            if (err.response && err.response.data) {
+                const errors = err.response.data.errors;
+                errors.map((x) => {
+                    return mostrarMensaje(dispatch, {
+                        tipo: 'danger',
+                        descripcion: x.msg
+                    });
                 });
-            });
+            } else {
+                mostrarMensaje(dispatch, {
+                    tipo: 'danger',
+                    descripcion: 'Error de conexion'
+                });
+            }
         });
 };

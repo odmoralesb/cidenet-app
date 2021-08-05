@@ -13,10 +13,14 @@ const INITIAL_STATE = Immutable.fromJS({
         correo: null,
         fechaIngreso: null,
         fechaRegistro: null,
-        uid: null
+        uid: null,
+        area: {
+            uid: null
+        }
     },
     paises: [],
     tipo_identificaciones: [],
+    areas: [],
     correos_similares: []
 });
 
@@ -32,9 +36,11 @@ export default function (state = INITIAL_STATE, action) {
         case types.REGISTRO_REALIZADO:
             const paises = state.get('paises');
             const tipo_identificaciones = state.get('tipo_identificaciones');
+            const areas = state.get('areas');
             state = INITIAL_STATE;
             state = state.set('paises', paises);
             state = state.set('tipo_identificaciones', tipo_identificaciones);
+            state = state.set('areas', areas);
             return state;
 
         case types.OBTENER_EMPLEADO:
@@ -50,6 +56,10 @@ export default function (state = INITIAL_STATE, action) {
                 'tipo_identificaciones',
                 Immutable.fromJS(action.payload)
             );
+            return state;
+
+        case types.OBTENER_AREAS:
+            state = state.set('areas', Immutable.fromJS(action.payload));
             return state;
 
         case types.OBTENER_CORREOS_SIMILARES:

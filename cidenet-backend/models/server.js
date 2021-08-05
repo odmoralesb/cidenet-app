@@ -12,7 +12,8 @@ class Server {
             empleados: '/api/empleados',
             buscar: '/api/buscar',
             paises: '/api/paises',
-            tipo_identificaciones: '/api/tipoidentificaciones'
+            tipo_identificaciones: '/api/tipoidentificaciones',
+            areas: '/api/areas'
         };
 
         // Conectar a base de datos
@@ -48,6 +49,7 @@ class Server {
             this.paths.tipo_identificaciones,
             require('../routes/tipo_identificaciones')
         );
+        this.app.use(this.paths.areas, require('../routes/areas'));
     }
 
     listen() {

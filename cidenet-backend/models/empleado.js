@@ -32,13 +32,24 @@ const empleadoSchema = Schema({
         type: String,
         required: [true, 'El correo es obligatorio']
     },
+    area: {
+        type: Schema.Types.ObjectId,
+        ref: 'Area',
+        required: true
+    },
     fechaIngreso: { type: Date },
-    fechaRegistro: { type: Date, default: Date.now }
+    fechaRegistro: { type: Date, default: Date.now },
+    estado: { type: Boolean, default: true }
 });
 
 empleadoSchema.methods.toJSON = function () {
     const { __v, _id, ...empleado } = this.toObject();
     empleado.uid = _id;
+    if (empleado.area) {
+        const { _id, ...area } = empleado.area;
+        area.uid = _id;
+        empleado.area = area;
+    }
     return empleado;
 };
 

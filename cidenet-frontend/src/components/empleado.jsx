@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 // Acciones
 import {
@@ -8,13 +9,15 @@ import {
     getTipoIdentificaciones,
     getCorreosSimilares,
     getEmpleado,
-    limpiar
+    limpiar,
+    getAreas
 } from '../actions/empleado';
 
 class Empleado extends Component {
     componentWillMount() {
         this.props.getPaises();
         this.props.getTipoIdentificaciones();
+        this.props.getAreas();
         if (this.props.id) {
             this.props.getEmpleado(this.props.id);
         }
@@ -104,13 +107,8 @@ class Empleado extends Component {
         }
     };
 
-    getFecha = (fecha) => {
-        fecha = fecha.split('T');
-        return fecha[0];
-    };
-
     render() {
-        const { info, paises, tipo_identificaciones } = this.props;
+        const { info, paises, tipo_identificaciones, areas } = this.props;
 
         return (
             <Fragment>
@@ -346,9 +344,9 @@ class Empleado extends Component {
                                 id="fechaIngreso"
                                 value={
                                     info.get('fechaIngreso')
-                                        ? this.getFecha(
+                                        ? moment(
                                               info.get('fechaIngreso')
-                                          )
+                                          ).format('YYYY-MM-DD')
                                         : ''
                                 }
                                 onChange={(e) =>
@@ -367,18 +365,73 @@ class Empleado extends Component {
                                 Fecha Registro
                             </label>
                             <input
-                                type="date"
+                                type="text"
                                 className="form-control"
                                 id="fechaRegistro"
                                 value={
                                     info.get('fechaRegistro')
-                                        ? this.getFecha(
+                                        ? moment(
                                               info.get('fechaRegistro')
-                                          )
+                                          ).format('DD/MM/YYYY HH:mm:ss')
                                         : ''
                                 }
                                 disabled
                             />
+                        </div>
+
+                        <div className="col-md-4">
+                            <label htmlFor="area" className="form-label">
+                                Área
+                            </label>
+                            <select
+                                className="form-control form-select"
+                                id="area"
+                                value={
+                                    info.getIn(['area', 'uid'])
+                                        ? info.getIn(['area', 'uid'])
+                                        : '0'
+                                }
+                                onChange={(e) =>
+                                    this.props.updateInputs(
+                                        'info.area.uid',
+                                        e.target.value
+                                    )
+                                }
+                            >
+                                <option value="0" disabled>
+                                    Seleccione el area
+                                </option>
+                                {areas &&
+                                    areas.map((x) => {
+                                        return (
+                                            <option
+                                                key={`${x.get('uid')}`}
+                                                value={x.get('uid')}
+                                            >
+                                                {x.get('nombre')}
+                                            </option>
+                                        );
+                                    })}
+                            </select>
+                        </div>
+
+                        <div className="col-md-4">
+                            <span
+                                className={`${
+                                    info.get('estado')
+                                        ? 'badge bg-primary'
+                                        : 'badge bg-secondary'
+                                }`}
+                                style={{
+                                    height: '25px',
+                                    width: '100px',
+                                    marginTop: '40px',
+                                    color: 'white',
+                                    paddingTop: '7px'
+                                }}
+                            >
+                                {info.get('estado') ? 'Activo' : 'Inactivo'}
+                            </span>
                         </div>
                     </div>
 
@@ -400,6 +453,7 @@ function mapStateToProps(state) {
         info: state.empleado.get('info'),
         paises: state.empleado.get('paises'),
         tipo_identificaciones: state.empleado.get('tipo_identificaciones'),
+        areas: state.empleado.get('areas'),
         correos_similares: state.empleado.get('correos_similares')
     };
 }
@@ -409,6 +463,7 @@ function mapDispatchToProps(dispatch) {
         updateInputs: (path, value) => dispatch(updateInputs(path, value)),
         getPaises: () => dispatch(getPaises()),
         getTipoIdentificaciones: () => dispatch(getTipoIdentificaciones()),
+        getAreas: () => dispatch(getAreas()),
         getCorreosSimilares: () => dispatch(getCorreosSimilares()),
         getEmpleado: (id) => dispatch(getEmpleado(id)),
         limpiar: () => dispatch(limpiar())
