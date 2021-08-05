@@ -17,6 +17,14 @@ export function updateInputs(path, value) {
     };
 }
 
+export function limpiarFiltro() {
+    return (dispatch) => {
+        dispatch({
+            type: types.LIMPIAR_FILTRO
+        });
+    };
+}
+
 export const getEmpleados = (page = 1, size = 10) => async (dispatch) => {
     const axios = createAxiosInstance();
     const from = (page - 1) * size;
@@ -81,7 +89,13 @@ export const deleteEmpleados = (id) => async (dispatch, getState) => {
 export const buscarEmpleados = (
     page = 1,
     size = 10,
-    filtro = { termino: '', identificacion: '' }
+    filtro = {
+        termino: '',
+        identificacion: '',
+        tipo_identificacion: '',
+        pais: '',
+        estado: true
+    }
 ) => async (dispatch) => {
     const axios = createAxiosInstance();
     const from = (page - 1) * size;

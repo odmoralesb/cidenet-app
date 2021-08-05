@@ -5,7 +5,10 @@ const INITIAL_STATE = Immutable.fromJS({
     data: [],
     busqueda: {
         termino: null,
-        identificacion: null
+        identificacion: null,
+        tipo_identificacion: null,
+        pais: null,
+        estado: true
     },
     pagination: {
         page: 1,
@@ -21,6 +24,10 @@ export default function (state = INITIAL_STATE, action) {
                 `${action.payload.path}`.split('.'),
                 Immutable.fromJS(action.payload.value)
             );
+            return state;
+
+        case types.LIMPIAR_FILTRO:
+            state = state.set('busqueda', INITIAL_STATE.get('busqueda'));
             return state;
 
         case types.OBTENER_EMPLEADOS:
